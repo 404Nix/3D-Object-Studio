@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # ─── MongoDB ───────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: 3d-studio-mongo
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ─── Backend API ───────────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: 3d-studio-server
+    restart: unless-stopped
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./server/.env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/3d-object-studio
+      - CLIENT_URL=http://localhost
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - server_uploads:/app/uploads
+    networks:
+      - app-network
+
+  # ─── Frontend ──────────────────────────────────────────
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: 3d-studio-client
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
+  server_uploads:
+
+networks:
+  app-network:
+    driver: bridge
