@@ -1,0 +1,59 @@
+=========================================================
+      3D OBJECT STUDIO - DOCKER RUN INSTRUCTIONS
+=========================================================
+
+Follow these steps exactly to run your app in Docker.
+
+STEP 1: Stop any local running servers
+---------------------------------------------------------
+Before starting Docker, make sure you don't have the 
+app running manually in your terminal (like 'npm run dev' 
+or 'node index.js'). If they are running, stop them by 
+pressing CTRL+C in those terminal windows.
+
+
+STEP 2: Open your terminal in the root folder
+---------------------------------------------------------
+Make sure your terminal is opened at:
+c:\Development\3D Object Studio
+
+
+STEP 3: Build and Start the Containers
+---------------------------------------------------------
+Run this command to build the Docker images and start 
+the containers in the background:
+
+docker-compose up --build -d
+
+(Note: The '-d' flag runs it in "detached" mode so you 
+can keep using your terminal. If you want to see the 
+live logs, just run: docker-compose up --build)
+
+
+STEP 4: Verify the app is running
+---------------------------------------------------------
+Wait a few seconds for everything to boot up.
+- Open your browser and go to: http://localhost
+- The frontend should appear!
+
+Your backend is quietly running at: http://localhost:5000
+
+
+STEP 5: Check the Logs (Optional)
+---------------------------------------------------------
+If something isn't working, you can view the server logs:
+
+docker-compose logs -f server
+
+(Press CTRL+C to stop viewing the logs)
+
+
+STEP 6: Stop the Application
+---------------------------------------------------------
+When you are done working and want to shut down the 
+Docker containers, run:
+
+docker-compose down
+
+This safely turns off everything without losing your 
+uploaded 3D models (because we used volumes!).

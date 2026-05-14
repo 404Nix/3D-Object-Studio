@@ -1,26 +1,19 @@
-# Build stage
-FROM node:20-alpine AS build
+FROM node:20-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm install
+
+RUN npm install -g serve
 
 COPY . .
+
+# Provide the backend URL so Vite can embed it into the built HTML/JS
+ENV VITE_API_URL=http://localhost:5000/api
+
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+EXPOSE 3000
 
-# Copy built assets
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:80 || exit 1
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "dist"]
