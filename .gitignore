@@ -32,3 +32,8 @@ server/uploads/
 coverage/
 
 3d-studio-key.pem
+
+docs/**/*.pdf
+docs/**/*.md
+docs/**/*.csv
+docs/**/*.png
