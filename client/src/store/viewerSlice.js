@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../services/api.js';
 
-// ─── Async Thunks ─────────────────────────────────────
 export const loadViewerState = createAsyncThunk(
   'viewer/loadState',
   async (modelId, { rejectWithValue }) => {
@@ -26,7 +25,6 @@ export const saveViewerState = createAsyncThunk(
   }
 );
 
-// ─── Default State ────────────────────────────────────
 const defaultInteractionState = {
   cameraPosition: { x: 5, y: 5, z: 5 },
   cameraTarget: { x: 0, y: 0, z: 0 },
@@ -36,7 +34,6 @@ const defaultInteractionState = {
   autoRotate: false,
 };
 
-// ─── Slice ────────────────────────────────────────────
 const viewerSlice = createSlice({
   name: 'viewer',
   initialState: {

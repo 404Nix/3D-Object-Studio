@@ -46,7 +46,6 @@ const ViewerPage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const stateAppliedRef = useRef(false);
 
-  // Fetch model metadata
   useEffect(() => {
     if (id) {
       dispatch(fetchModelById(id));
@@ -54,12 +53,10 @@ const ViewerPage = () => {
     }
   }, [id, dispatch]);
 
-  // Load the 3D model once metadata is available
   useEffect(() => {
     if (currentModel && !isInitialized) {
       let modelUrl = currentModel.s3Url;
 
-      // For local storage, prepend the API base URL
       if (currentModel.storageType === 'local') {
         const base = API_BASE.replace('/api', '');
         modelUrl = `${base}${currentModel.s3Url}`;
@@ -71,7 +68,6 @@ const ViewerPage = () => {
     }
   }, [currentModel, isInitialized, loadModel]);
 
-  // Apply saved state after model loads
   useEffect(() => {
     if (isInitialized && interactionState && !stateAppliedRef.current) {
       applyState(interactionState);
@@ -79,7 +75,6 @@ const ViewerPage = () => {
     }
   }, [isInitialized, interactionState, applyState]);
 
-  // Periodic state capture for persistence
   useEffect(() => {
     if (!isInitialized) return;
 
@@ -95,14 +90,12 @@ const ViewerPage = () => {
     return () => clearInterval(interval);
   }, [isInitialized, getState, dispatch]);
 
-  // Save state on unmount
   useEffect(() => {
     return () => {
       forceSave();
     };
   }, [forceSave]);
 
-  // ─── Handlers ──────────────────────────────────────
   const handleReset = useCallback(() => {
     resetCamera();
     dispatch(resetViewerState());

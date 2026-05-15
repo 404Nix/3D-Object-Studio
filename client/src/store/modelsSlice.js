@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../services/api.js';
 
-// ─── Async Thunks ─────────────────────────────────────
 export const fetchModels = createAsyncThunk(
   'models/fetchModels',
   async ({ page = 1, limit = 20 } = {}, { rejectWithValue }) => {
@@ -55,7 +54,6 @@ export const deleteModel = createAsyncThunk(
   }
 );
 
-// ─── Slice ────────────────────────────────────────────
 const modelsSlice = createSlice({
   name: 'models',
   initialState: {

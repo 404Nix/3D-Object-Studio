@@ -15,32 +15,21 @@ import { uploadLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
 
-// All model routes require authentication
 router.use(auth);
 
-/**
- * POST /api/models/upload
- */
+
 router.post('/upload', uploadLimiter, upload.single('model'), uploadModel);
 
-/**
- * GET /api/models
- */
+
 router.get('/', getModels);
 
-/**
- * GET /api/models/:id
- */
+
 router.get('/:id', getModelById);
 
-/**
- * DELETE /api/models/:id
- */
+
 router.delete('/:id', deleteModel);
 
-/**
- * POST /api/models/:id/state
- */
+
 router.post(
   '/:id/state',
   validate([
@@ -63,9 +52,7 @@ router.post(
   saveState
 );
 
-/**
- * GET /api/models/:id/state
- */
+
 router.get('/:id/state', getState);
 
 export default router;

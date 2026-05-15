@@ -2,9 +2,6 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import SceneManager from '../three/SceneManager.js';
 import ModelLoader from '../three/ModelLoader.js';
 
-/**
- * React hook wrapping the Three.js SceneManager and ModelLoader.
- */
 const useThreeScene = () => {
   const containerRef = useRef(null);
   const sceneManagerRef = useRef(null);
@@ -14,7 +11,6 @@ const useThreeScene = () => {
   const [loadProgress, setLoadProgress] = useState(0);
   const [error, setError] = useState(null);
 
-  // ─── Initialize Scene ───────────────────────────────
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -31,7 +27,6 @@ const useThreeScene = () => {
     };
   }, []);
 
-  // ─── Load Model ─────────────────────────────────────
   const loadModel = useCallback(async (url) => {
     if (!sceneManagerRef.current || !modelLoaderRef.current) return;
 
@@ -40,7 +35,6 @@ const useThreeScene = () => {
     setError(null);
 
     try {
-      // Dispose previous model
       modelLoaderRef.current.dispose();
 
       const model = await modelLoaderRef.current.load(url, (progress) => {
@@ -56,7 +50,6 @@ const useThreeScene = () => {
     }
   }, []);
 
-  // ─── Controls ───────────────────────────────────────
   const resetCamera = useCallback(() => {
     sceneManagerRef.current?.resetCamera();
   }, []);

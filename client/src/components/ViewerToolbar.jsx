@@ -29,7 +29,6 @@ const ViewerToolbar = ({
         borderBottom: '1px solid var(--glass-border)',
       }}
     >
-      {/* Left — Back + Model Name */}
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
@@ -57,7 +56,6 @@ const ViewerToolbar = ({
         </div>
       </div>
 
-      {/* Center — Controls */}
       <div className="flex items-center gap-2">
         <button
           onClick={onReset}
@@ -87,7 +85,6 @@ const ViewerToolbar = ({
         </button>
       </div>
 
-      {/* Right — Info */}
       <div className="flex items-center gap-2">
         <div
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-help"

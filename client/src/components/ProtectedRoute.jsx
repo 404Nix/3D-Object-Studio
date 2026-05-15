@@ -1,10 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth.js';
 
-/**
- * ProtectedRoute — redirects to /login if not authenticated.
- * Shows a loading spinner during the initial auth check.
- */
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();

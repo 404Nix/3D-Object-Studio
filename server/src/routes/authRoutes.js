@@ -10,9 +10,6 @@ const router = Router();
 // Apply rate limiting to all auth routes
 router.use(authLimiter);
 
-/**
- * POST /api/auth/register
- */
 router.post(
   '/register',
   validate([
@@ -36,9 +33,6 @@ router.post(
   register
 );
 
-/**
- * POST /api/auth/login
- */
 router.post(
   '/login',
   validate([
@@ -48,19 +42,10 @@ router.post(
   login
 );
 
-/**
- * POST /api/auth/logout
- */
 router.post('/logout', logout);
 
-/**
- * POST /api/auth/refresh
- */
 router.post('/refresh', refresh);
 
-/**
- * GET /api/auth/me
- */
 router.get('/me', auth, getMe);
 
 export default router;

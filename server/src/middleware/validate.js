@@ -1,13 +1,9 @@
 import { validationResult } from 'express-validator';
 import { AppError } from './errorHandler.js';
 
-/**
- * Middleware that runs express-validator checks and returns errors if any.
- * Usage: validate([check('email').isEmail(), ...])
- */
 const validate = (validations) => {
   return async (req, res, next) => {
-    // Run all validations
+
     await Promise.all(validations.map((validation) => validation.run(req)));
 
     const errors = validationResult(req);

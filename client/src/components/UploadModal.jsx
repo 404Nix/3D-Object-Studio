@@ -5,9 +5,6 @@ import { HiOutlineCloudArrowUp, HiOutlineXMark, HiOutlineCube } from 'react-icon
 import { uploadModel } from '../store/modelsSlice.js';
 import toast from 'react-hot-toast';
 
-/**
- * Upload Modal with drag-and-drop support.
- */
 const UploadModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const { isUploading } = useSelector((state) => state.models);

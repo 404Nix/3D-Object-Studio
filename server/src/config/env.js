@@ -20,13 +20,8 @@ const env = {
   AWS_REGION: process.env.AWS_REGION || 'us-east-1',
   AWS_S3_BUCKET: process.env.AWS_S3_BUCKET || '3d-object-studio-uploads',
 
-  // Client
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173',
-
-  // Upload
   MAX_FILE_SIZE: parseInt(process.env.MAX_FILE_SIZE, 10) || 52428800, // 50MB
-
-  // Helpers
   get isProduction() {
     return this.NODE_ENV === 'production';
   },
@@ -38,7 +33,6 @@ const env = {
   },
 };
 
-// Validate required vars
 const requiredVars = ['JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
 const missing = requiredVars.filter((key) => !env[key]);
 if (missing.length > 0) {

@@ -2,22 +2,16 @@ import { useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveViewerState, markClean } from '../store/viewerSlice.js';
 
-/**
- * Hook that debounces interaction state saves to the backend.
- * Saves 2 seconds after the last state change.
- */
 const useStateSync = (modelId) => {
   const dispatch = useDispatch();
   const { interactionState, isDirty } = useSelector((state) => state.viewer);
   const timerRef = useRef(null);
   const stateRef = useRef(interactionState);
 
-  // Keep ref updated
   useEffect(() => {
     stateRef.current = interactionState;
   }, [interactionState]);
 
-  // Debounced save
   useEffect(() => {
     if (!isDirty || !modelId) return;
 
@@ -41,7 +35,6 @@ const useStateSync = (modelId) => {
     };
   }, [isDirty, modelId, dispatch, interactionState]);
 
-  // Force save (e.g., on unmount)
   const forceSave = useCallback(() => {
     if (isDirty && modelId) {
       if (timerRef.current) {

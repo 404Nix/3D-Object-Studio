@@ -2,9 +2,6 @@ import { motion } from 'framer-motion';
 import { HiOutlineCube, HiOutlineTrash, HiOutlineEye } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 
-/**
- * ModelCard — displays model metadata with view/delete actions.
- */
 const ModelCard = ({ model, onDelete, index = 0 }) => {
   const navigate = useNavigate();
 
@@ -30,7 +27,6 @@ const ModelCard = ({ model, onDelete, index = 0 }) => {
       className="card group"
       style={{ cursor: 'pointer' }}
     >
-      {/* Preview Area */}
       <div
         className="relative flex items-center justify-center rounded-lg mb-4 overflow-hidden"
         style={{
@@ -46,7 +42,6 @@ const ModelCard = ({ model, onDelete, index = 0 }) => {
           />
         </div>
 
-        {/* Hover overlay */}
         <div
           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: 'rgba(168, 85, 247, 0.1)' }}
@@ -58,7 +53,6 @@ const ModelCard = ({ model, onDelete, index = 0 }) => {
         </div>
       </div>
 
-      {/* Info */}
       <div className="flex flex-col gap-2">
         <h3
           className="font-semibold truncate"
@@ -83,7 +77,6 @@ const ModelCard = ({ model, onDelete, index = 0 }) => {
           </span>
         </div>
 
-        {/* Actions */}
         <div className="flex items-center gap-2 mt-2">
           <button
             onClick={() => navigate(`/viewer/${model._id}`)}

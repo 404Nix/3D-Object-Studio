@@ -10,8 +10,6 @@ const api = axios.create({
   },
 });
 
-// ─── Request Interceptor ──────────────────────────────
-// Attach access token to every request
 api.interceptors.request.use(
   (config) => {
     const token = sessionStorage.getItem('accessToken');
@@ -23,8 +21,6 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ─── Response Interceptor ─────────────────────────────
-// On 401, attempt a silent token refresh and retry the request
 let isRefreshing = false;
 let failedQueue = [];
 

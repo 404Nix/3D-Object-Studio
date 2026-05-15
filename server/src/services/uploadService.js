@@ -10,9 +10,7 @@ import env from '../config/env.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = path.join(__dirname, '../../uploads');
 
-/**
- * Ensure local uploads directory exists.
- */
+
 const ensureUploadsDir = async () => {
   try {
     await fs.access(UPLOADS_DIR);
@@ -21,13 +19,9 @@ const ensureUploadsDir = async () => {
   }
 };
 
-/**
- * Upload Service — handles file uploads to S3 or local storage.
- */
+
 const uploadService = {
-  /**
-   * Upload a file buffer. Returns { url, key, storageType }.
-   */
+
   async uploadFile(fileBuffer, originalName, mimetype) {
     const ext = path.extname(originalName).toLowerCase();
     const uniqueName = `${uuidv4()}${ext}`;
@@ -42,9 +36,7 @@ const uploadService = {
     return this.uploadToLocal(fileBuffer, uniqueName);
   },
 
-  /**
-   * Upload to AWS S3 using multipart upload.
-   */
+
   async uploadToS3(fileBuffer, key, mimetype) {
     const upload = new Upload({
       client: s3Client,
@@ -67,9 +59,7 @@ const uploadService = {
     };
   },
 
-  /**
-   * Save file locally (development fallback).
-   */
+
   async uploadToLocal(fileBuffer, fileName) {
     await ensureUploadsDir();
     const filePath = path.join(UPLOADS_DIR, fileName);
@@ -84,9 +74,7 @@ const uploadService = {
     };
   },
 
-  /**
-   * Delete a file from S3 or local storage.
-   */
+
   async deleteFile(key, storageType) {
     if (storageType === 's3' && s3Client) {
       const command = new DeleteObjectCommand({
@@ -99,7 +87,7 @@ const uploadService = {
       try {
         await fs.unlink(filePath);
       } catch {
-        // File may already be deleted
+        // File already be deleted
       }
     }
   },

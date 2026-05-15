@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 
-/**
- * Full-screen loading overlay with progress bar.
- */
+
 const LoadingOverlay = ({ progress = 0, message = 'Loading model...' }) => {
   return (
     <motion.div
@@ -13,7 +11,7 @@ const LoadingOverlay = ({ progress = 0, message = 'Loading model...' }) => {
       style={{ background: 'rgba(9, 9, 15, 0.9)', backdropFilter: 'blur(8px)' }}
     >
       <div className="flex flex-col items-center gap-6">
-        {/* Animated 3D icon */}
+
         <div className="animate-float" style={{ fontSize: '3rem' }}>
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
             <path
@@ -38,18 +36,14 @@ const LoadingOverlay = ({ progress = 0, message = 'Loading model...' }) => {
           </svg>
         </div>
 
-        {/* Message */}
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{message}</p>
 
-        {/* Progress bar */}
         <div className="progress-bar" style={{ width: '200px' }}>
           <div
             className="progress-fill"
             style={{ width: `${progress}%`, transition: 'width 0.3s ease' }}
           />
         </div>
-
-        {/* Percentage */}
         <p
           className="gradient-text"
           style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 600 }}

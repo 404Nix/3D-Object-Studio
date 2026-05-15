@@ -2,10 +2,6 @@ import multer from 'multer';
 import { AppError } from './errorHandler.js';
 import env from '../config/env.js';
 
-/**
- * Multer configuration for .glb file uploads.
- * Uses memory storage (buffer) for S3 upload or local write.
- */
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
